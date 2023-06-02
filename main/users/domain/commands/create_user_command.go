@@ -1,17 +1,20 @@
 package commands
 
-import (
-	logger "github.com/sirupsen/logrus"
-)
+import "ticketNowService/main/users/domain/repositories"
 
-type CreateUser struct{}
-
-func NewCreateUser() CreateUser {
-	return CreateUser{}
+type CreateUserCommand struct {
+	repository repositories.IUsersRepository
 }
 
-func (itself CreateUser) CreateUserCommand() {
-	logger.Info("Command - Create Users")
-	logger.Info("Command - Create Users")
-	logger.Info("Command - Create Users")
+func NewCreateUserCommand(repository repositories.IUsersRepository) CreateUserCommand {
+	return CreateUserCommand{repository}
+}
+
+func (itself CreateUserCommand) Execute() error {
+	err := itself.repository.Create()
+
+	if err != nil {
+		return err
+	}
+	return nil
 }

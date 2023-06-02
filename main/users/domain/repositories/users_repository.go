@@ -1,6 +1,6 @@
 package repositories
 
-type UsersRepository interface {
+type IUsersRepository interface {
 	Create() error
 	FindAll() error
 	FindById() error
